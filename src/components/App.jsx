@@ -1,6 +1,6 @@
 
 import './App.css';
-import { ThemeProvider } from '@mui/styles';
+import { ThemeProvider } from '@mui/material';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import  theme from './ui/Theme'
@@ -11,15 +11,19 @@ function App() {
   return (
 
   <ThemeProvider theme={theme}>
-    <BrowserRouter>
-    <Header/>
-     <h1>Hello</h1>
-    <Routes>
-      <Route path='/' component={()=><div>Home</div>}/>
    
-    </Routes>
-   
-     </BrowserRouter>
+   <BrowserRouter> 
+       <Header/>
+       <Routes>
+         <Route  path="/" element={<>home</>}/> 
+         <Route  path="/services" element={<>services</>}/> 
+         <Route  path="/revolution"element={<>revolution</>}/> 
+         <Route  path="/about" element={<>about</>}/> 
+         <Route  path="/contact"element={<>contact</>}/> 
+       </Routes>
+      </BrowserRouter>
+ 
+
      </ThemeProvider>
   );
 }

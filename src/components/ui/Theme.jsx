@@ -1,29 +1,35 @@
-import { createTheme } from '@mui/material/styles';
+import {createTheme } from '@mui/material/styles';
+ 
+const arcBlue = "#0B72B9";
+const arcOrange = "#FFBA60";
 
-
-const arcBlue='#0B72B9'
-const arcOrange='#FFBA60'
 export default createTheme({
- palette:{
-     common:{
-         blue:`${arcBlue}`,
-         orange:`${arcOrange}`,
-     },
-     primary:{
-main:`${arcBlue}`
-     },
-     secoundary:{
-main:`${arcOrange}`
-     },
-     typography:{
-     tab:{
-        textTransform:'none',
-        fontWeight:700,
-        fontSize:'1rem'
-     }
-
-
-     }
-
+  palette: {
+    common: {
+      blue: arcBlue,
+      orange: arcOrange
+    },
+    primary: {
+      main: arcBlue
+    },
+    secondary: {
+      main: arcOrange
     }
-  });
+  },
+
+     typography:{
+         tab:{
+            fontFamily:"Raleway !important",
+            textTransform:"none !important",
+            fontWeight:700 ,
+            fontSize:"20px !important",
+            color:"white !important"
+        },
+        estimate:{
+            fontFamily:"pacifico !important",
+            textTransform:"none !important",
+            fontSize:"1rem !important",
+            color:"white !important"
+        }
+     }
+ })
