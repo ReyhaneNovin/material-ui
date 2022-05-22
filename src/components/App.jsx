@@ -20,6 +20,9 @@ function App() {
          <Route  path="/revolution"element={<>revolution</>}/> 
          <Route  path="/about" element={<>about</>}/> 
          <Route  path="/contact"element={<>contact</>}/> 
+         <Route  path="/customsoftware"element={<>customsoftware</>}/> 
+         <Route  path="/mobileapps"element={<>mobileappst</>}/> 
+         <Route  path="/websites"element={<>websites</>}/> 
        </Routes>
       </BrowserRouter>
  
