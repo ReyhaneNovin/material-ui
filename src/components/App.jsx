@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import  theme from './ui/Theme'
 
 import Header from './ui/Header';
+import Footer from './ui/Footer'
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
    <BrowserRouter> 
        <Header/>
        <Routes>
-         <Route  path="/" element={<>home</>}/> 
+         <Route  path="/" element={<div style={{height:"2000px"}}>home</div>}/> 
          <Route  path="/services" element={<>services</>}/> 
          <Route  path="/revolution"element={<>revolution</>}/> 
          <Route  path="/about" element={<>about</>}/> 
@@ -24,6 +25,7 @@ function App() {
          <Route  path="/mobileapps"element={<>mobileappst</>}/> 
          <Route  path="/websites"element={<>websites</>}/> 
        </Routes>
+       <Footer/>
       </BrowserRouter>
  
 
