@@ -8,6 +8,8 @@ import theme from "./ui/Theme";
 import Header from "./ui/Header";
 import Footer from "./ui/Footer";
 import LandingPage from "./LandingPage";
+import Services from "./Services";
+import CustomSoftware from "./CustomSoftware";
 
 function App() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -23,11 +25,11 @@ function App() {
         />
         <Routes>
           <Route exact path="/" element={<LandingPage setValue={setValue} setSelectedIndex={setSelectedIndex}/>} />
-          <Route path="/services" element={<>services</>} />
+          <Route path="/services" element={<Services setValue={setValue} setSelectedIndex={setSelectedIndex}/>} />
           <Route path="/revolution" element={<>revolution</>} />
           <Route path="/about" element={<>about</>} />
           <Route path="/contact" element={<>contact</>} />
-          <Route path="/customsoftware" element={<>customsoftware</>} />
+          <Route path="/customsoftware" element={<CustomSoftware setValue={setValue} setSelectedIndex={setSelectedIndex}/>} />
           <Route path="/mobileapps" element={<>mobileappst</>} />
           <Route path="/websites" element={<>websites</>} />
         </Routes>
