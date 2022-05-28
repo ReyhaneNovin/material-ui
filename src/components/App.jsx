@@ -22,7 +22,7 @@ function App() {
           setSelectedIndex={setSelectedIndex}
         />
         <Routes>
-          <Route exact path="/" element={<LandingPage />} />
+          <Route exact path="/" element={<LandingPage setValue={setValue} setSelectedIndex={setSelectedIndex}/>} />
           <Route path="/services" element={<>services</>} />
           <Route path="/revolution" element={<>revolution</>} />
           <Route path="/about" element={<>about</>} />

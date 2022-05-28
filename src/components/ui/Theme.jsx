@@ -38,13 +38,20 @@ export default createTheme({
       fontFamily: "Raleway !important",
       fontWeight: " 700 ",
       fontSize: "28px !important",
+      color: "blue",
+      lineHeight: "1.5",
+    },
+    h3:{
+      fontFamily: "pacifico !important",
+      fontWeight: " 700 ",
+      fontSize: "26px !important",
       color: "blue !important",
       lineHeight: "1.5",
     },
      h4: {
        fontFamily: "Raleway !important",
        fontWeight: " 700 ",
-      fontSize: "26px !important",
+      fontSize: "23px !important",
        color: "blue !important",
    lineHeight: "1.5",
     },
@@ -52,6 +59,11 @@ export default createTheme({
       fontSize: "18px !important",
       fontWeight: " 300 ",
       color:` ${arcGrey} !important` ,
+    },
+    subtitle2:{
+      fontSize: "18px !important",
+      fontWeight: " 300 ",
+      color:"white" ,
     },
   },
 });
