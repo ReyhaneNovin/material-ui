@@ -1,9 +1,9 @@
 import { createTheme } from "@mui/material/styles";
-import { red,grey} from "@mui/material/colors";
+import { red} from "@mui/material/colors";
 
 const arcRed = red[700] + "!important";
 const arcOrange = "#FFBA60 !important";
-const arcGrey = grey[400] + "!important";
+const arcGrey = "#868686!important";
 
 export default createTheme({
   palette: {

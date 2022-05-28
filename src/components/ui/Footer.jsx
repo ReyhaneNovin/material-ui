@@ -84,7 +84,7 @@ const Footer = (props) => {
            Custom Software Development
            </Grid>
            <Grid item className={classes.link} component={Link} to="/mobileapps" onClick={()=>{props.setValue(1);props.setSelectedIndex(2)}}>
-            Mobile App Development
+            Ios/Android Development
            </Grid>
            <Grid item className={classes.link}component={Link} to="/websites"onClick={()=>{props.setValue(1);props.setSelectedIndex(3)}} >
               Website Development
