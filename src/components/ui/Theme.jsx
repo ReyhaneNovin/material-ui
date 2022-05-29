@@ -65,5 +65,9 @@ export default createTheme({
       fontWeight: " 300 ",
       color:"white" ,
     },
+    body1:{
+      fontSize: "20px !important",
+      fontWeight: " 300 ",
+    }
   },
 });
