@@ -11,6 +11,7 @@ import LandingPage from "./LandingPage";
 import Services from "./Services";
 import CustomSoftware from "./CustomSoftware";
 import About from "./About";
+import Contact from "./Contact"
 
 function App() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -29,7 +30,7 @@ function App() {
           <Route path="/services" element={<Services setValue={setValue} setSelectedIndex={setSelectedIndex}/>} />
           <Route path="/revolution" element={<>revolution</>} />
           <Route path="/about" element={<About setValue={setValue} setSelectedIndex={setSelectedIndex}/>} />
-          <Route path="/contact" element={<>contact</>} />
+          <Route path="/contact" element={<Contact setValue={setValue} setSelectedIndex={setSelectedIndex}/>} />
           <Route path="/customsoftware" element={<CustomSoftware setValue={setValue} setSelectedIndex={setSelectedIndex}/>} />
           <Route path="/mobileapps" element={<>mobileappst</>} />
           <Route path="/websites" element={<>websites</>} />
