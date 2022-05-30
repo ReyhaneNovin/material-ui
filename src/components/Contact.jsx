@@ -16,6 +16,8 @@ import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import axios from "axios";
 import CircularProgress from '@mui/material/CircularProgress';
+import Snackbar from '@mui/material/Snackbar';
+
 
 
 
@@ -92,6 +94,7 @@ const Contact = (props) => {
     const [message,setMessage]=useState("")
     const [open,setOpen]=useState(false)
     const [loading,setLoading]=useState(false)
+    const [alert,setAlert]=useState({open:false , message:"" , backgroundColor:""})
 
 
 const onChange=(event)=>{
@@ -124,16 +127,25 @@ default:
 }
 const onConfirm=()=>{
   setLoading(true)
-axios.get('https://jsonplaceholder.typicode.com/users')
+axios.get('https://jsonplaceholder.typicode.com/users',
+{
+  params:{
+name:name,
+email:email,
+phone:phone,
+message:message,
+
+}})
 .then(res=>{
-  setLoading(false)
-  setOpen(false)
-  setName("")
-  setEmail("")
-  setPhone("")
-  setMessage("")
+  setLoading(false);
+  setOpen(false);
+  setName("");
+  setEmail("");
+  setPhone("");
+  setMessage("");
+  setAlert({open:true,message:"Message sent Successfuly",backgroundColor:"#4BB543"})
 })
-.catch(err=>setLoading(false));
+.catch(err=>{setLoading(false);setAlert({open:true,message:"something went wrong ,please try again",backgroundColor:"#FF3232"})});
 };
 const buttonContants=(
   <> 
@@ -295,6 +307,9 @@ Confirm Message
           </Grid>
         </DialogContent>
       </Dialog>
+      <Snackbar open={alert.open} message={alert.message} ContentProps={{style:{backgroundColor:alert.backgroundColor}}} anchorOrigin={{vertical:"top",horizontal:"center"}} onClose={()=>setAlert({...alert,open:false})} autoHideDuration={4000}>
+
+      </Snackbar>
 
       <Grid item container justifyContent={matchesMD ? "center" :"undefined"} direction={matchesMD ? "column" :"row"} className={classes.background} lg={8} xl={9} alignItems="center" >
       <Grid item style={{marginLeft:matchesMD ? 0 : "3em", textAlign:matchesMD ? "center" : "inherit"}}>
