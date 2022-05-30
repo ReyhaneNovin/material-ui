@@ -14,6 +14,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import ButtonArrow from "../components/ui/ButtonArrow";
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
+import axios from "axios";
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 
@@ -89,6 +91,8 @@ const Contact = (props) => {
 
     const [message,setMessage]=useState("")
     const [open,setOpen]=useState(false)
+    const [loading,setLoading]=useState(false)
+
 
 const onChange=(event)=>{
   let valid;
@@ -118,6 +122,26 @@ default:
   }
 
 }
+const onConfirm=()=>{
+  setLoading(true)
+axios.get('https://jsonplaceholder.typicode.com/users')
+.then(res=>{
+  setLoading(false)
+  setOpen(false)
+  setName("")
+  setEmail("")
+  setPhone("")
+  setMessage("")
+})
+.catch(err=>setLoading(false));
+};
+const buttonContants=(
+  <> 
+  send Message
+  <img src={airplane} alt="airplane" style={{marginLeft:"1em"}} />
+  </>
+)
+
  
   
 
@@ -193,8 +217,8 @@ default:
 <TextField id="message" style={{marginBottom:"0.5em"}}   fullWidth InputProps={{disableUnderline:true}} className={classes.message} multiline rows={10} label="Message" variant="standard" value={message} onChange={(event)=> setMessage(event.target.value)}/>
 </Grid>
 <Grid item container justifyContent="center" mt={2}>
-    <Button variant="contained" className={classes.sendButton} onClick={()=>setOpen(true)}>send Message
-    <img src={airplane} alt="airplane" style={{marginLeft:"1em"}} />
+    <Button variant="contained" className={classes.sendButton} onClick={()=>setOpen(true)}>
+      {buttonContants}
     </Button>
 </Grid>
   </Grid>
@@ -234,7 +258,7 @@ Confirm Message
           variant="standard" 
           value={email}
           fullWidth
-          onChange={onChange}
+          onChange={onConfirm}
         />
     </Grid>
     <Grid item style={{marginBottom:"0.5em"}}>
@@ -258,10 +282,11 @@ Confirm Message
           <Grid item container direction={matchesSM ? "column" :"row"} style={{margintop:"2em"}} alignItems="center">
  
 <Grid item>
-<Button variant="contained" className={classes.sendButton} onClick={()=>setOpen(true)}>send Message
-    <img src={airplane} alt="airplane" style={{marginLeft:"1em"}} />
+<Button variant="contained" className={classes.sendButton} onClick={onConfirm}>
+{loading ? <CircularProgress size={50} color="success"/> : buttonContants }
     </Button>
 </Grid>
+
 <Grid item> 
 <Button onClick={()=>setOpen(false)} style={{fontWeight:"300"}}>
   Cancle
