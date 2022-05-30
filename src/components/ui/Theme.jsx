@@ -68,6 +68,15 @@ export default createTheme({
     body1:{
       fontSize: "20px !important",
       fontWeight: " 300 ",
-    }
+    },
+
   },
+  overrides:{
+    MuiInputLabel:{
+      root:{
+        color:arcRed,
+        fontSize:"16px !important"
+      }
+    }
+  }
 });
