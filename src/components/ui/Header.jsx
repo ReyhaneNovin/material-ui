@@ -223,7 +223,7 @@ const Header = (props) => {
           />
         ))}
       </Tabs>
-      <Button variant="contained"  color="primary" className={classes.button}>
+      <Button variant="contained"  color="primary" className={classes.button} component={Link} to="/estimate">
         Estimate
       </Button>
       <Menu

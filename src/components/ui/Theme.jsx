@@ -55,6 +55,13 @@ export default createTheme({
        color: "blue !important",
    lineHeight: "1.5",
     },
+    h6: {
+      fontFamily: "Raleway !important",
+      fontWeight: " 500 ",
+     fontSize: "19px !important",
+      color: "blue !important",
+  lineHeight: "1.5",
+   },
     subtitle1:{
       fontSize: "18px !important",
       fontWeight: " 300 ",

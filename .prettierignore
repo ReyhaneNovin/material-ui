@@ -1,0 +1,11 @@
+*.min.*
+assets/vendor/
+assets/fonts/
+assets/images/
+public/
+build/
+node_modules/
+package-lock.json
+yarn.lock
+package.json
+README.md

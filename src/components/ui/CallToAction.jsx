@@ -80,7 +80,7 @@ const CallToAction = (props) => {
 
      </Grid>
      <Grid item >
-        <Button variant="contained" className={classes.estimateButton}>
+        <Button variant="contained" className={classes.estimateButton} component={Link} to="/estimate">
             Free Estimate
             </Button> 
      </Grid>
