@@ -1,93 +1,100 @@
-import React, { useState } from 'react';
-import { cloneDeep } from 'lodash';
-import Lottie from 'react-lottie';
+import { Grid } from '@mui/material';
+import { Typography } from '@mui/material';
 import { makeStyles, useTheme } from '@mui/styles';
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import { Button } from '@mui/material';
+import Lottie from 'react-lottie';
+import { cloneDeep } from 'lodash';
+import { useState } from 'react';
+import { Dialog } from '@mui/material';
+import { DialogContent } from '@mui/material';
+
 import check from '../assets/images/check.svg';
+import send from '../assets/images/send.svg';
+import software from '../assets/images/software.svg';
+import mobile from '../assets/images/mobile.svg';
 import website from '../assets/images/website.svg';
+
 import backArrow from '../assets/images/backArrow.svg';
 import backArrowDisabled from '../assets/images/backArrowDisabled.svg';
+import forwardArrow from '../assets/images/forwardArrow.svg';
 import forwardArrowDisabled from '../assets/images/forwardArrowDisabled.svg';
 import camera from '../assets/images/camera.svg';
-import forwardArrow from '../assets/images/forwardArrow.svg';
 import upload from '../assets/images/upload.svg';
 import person from '../assets/images/person.svg';
 import persons from '../assets/images/persons.svg';
-import people from '../assets/images/people.svg';
 import info from '../assets/images/info.svg';
 import bell from '../assets/images/bell.svg';
+import people from '../assets/images/people.svg';
 import users from '../assets/images/users.svg';
-import iphone from '../assets/images/iphone.svg';
+import iPhone from '../assets/images/iphone.svg';
 import gps from '../assets/images/gps.svg';
 import customized from '../assets/images/customized.svg';
 import data from '../assets/images/data.svg';
 import android from '../assets/images/android.svg';
 import globe from '../assets/images/globe.svg';
 import biometrics from '../assets/images/biometrics.svg';
-import software from '../assets/images/software.svg';
-import mobile from '../assets/images/mobile.svg';
+
 import estimateAnimation from '../animations/estimateAnimation/data.json';
 
-const useStyles = makeStyles((theme) => ({
+import React from 'react';
+
+const useStyle = makeStyles((theme) => ({
   icon: {
     width: '12em',
     height: '10em',
   },
   estimateButton: {
     ...theme.typography.estimate,
-    borderRadius: '20px',
-    backgroundColor: theme.palette.common.red,
+    borderRadius: '50px !important',
+    backgroundColor: `${theme.palette.common.orange}!important`,
     height: 50,
-    width: '225',
-    fontSize: '1.2em !important',
+    width: 225,
     marginTop: '5em',
+    fontSize: '1.25rem',
     '&:hover': {
-      backgroundColor: theme.palette.secondary.light,
+      backgroundColor: `{theme.palette.secondary.light}!impotant`,
     },
   },
 }));
+
 const defaultQuestions = [
   {
     id: 1,
-    title: 'Wich service Are you intersted in?',
+    title: 'Which service are you interested in?',
     active: true,
     options: [
       {
         id: 1,
-        title: 'Custom softWare Development',
+        title: 'Custom Software Development',
         subtitle: null,
         icon: software,
-        iconAlt: 'software',
+        iconAlt: 'three floating screens',
         selected: false,
-        const: 0,
+        cost: 0,
       },
       {
         id: 2,
-        title: 'Ios/Android  Development',
+        title: 'iOS/Android App Development',
         subtitle: null,
         icon: mobile,
-        iconAlt: 'mobile',
+        iconAlt: 'outlines of phones and tablets',
         selected: false,
-        const: 0,
+        cost: 0,
       },
       {
         id: 3,
-        title: 'website',
+        title: 'Website Development',
         subtitle: null,
         icon: website,
-        iconAlt: 'camputer',
+        iconAlt: 'computer outline',
         selected: false,
-        const: 0,
+        cost: 0,
       },
     ],
   },
 ];
-// const newQuestions = cloneDeep(defaultQuestions);
-// newQuestions[0].options[0].selected = true;
-// console.log(defaultQuestions[0].options[0]);
+
 const softwareQuestions = [
   { ...defaultQuestions[0], active: false },
   {
@@ -108,7 +115,7 @@ const softwareQuestions = [
         id: 2,
         title: 'iOS Application',
         subtitle: null,
-        icon: iphone,
+        icon: iPhone,
         iconAlt: 'outline of iphone',
         selected: false,
         cost: 100,
@@ -306,19 +313,24 @@ const websiteQuestions = [
   },
 ];
 
-const Estimate = () => {
-  const classes = useStyles();
+function Estimate() {
+  const classes = useStyle();
   const theme = useTheme();
-  const [questions, setQuestions] = useState(softwareQuestions);
+
+  const [questions, setQuestions] = useState(defaultQuestions);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const defaultOptions = {
     loop: true,
-    autoplay: true,
+    autoplay: false,
     animationData: estimateAnimation,
     rendererSettings: {
       preserveAspectRatio: 'xMidYMid slice',
     },
   };
+
+  //   nextQuestion
+
   const nextQuestion = () => {
     const newQuestions = cloneDeep(questions);
     const currentlyActive = newQuestions.filter((question) => question.active);
@@ -326,99 +338,189 @@ const Estimate = () => {
     const nextIndex = activeIndex + 1;
     newQuestions[activeIndex] = { ...currentlyActive[0], active: false };
     newQuestions[nextIndex] = { ...newQuestions[nextIndex], active: true };
+
     setQuestions(newQuestions);
   };
-  const previosQuestion = () => {
+
+  //   previousQuestion
+
+  const previousQuestion = () => {
     const newQuestions = cloneDeep(questions);
     const currentlyActive = newQuestions.filter((question) => question.active);
     const activeIndex = currentlyActive[0].id - 1;
     const nextIndex = activeIndex - 1;
     newQuestions[activeIndex] = { ...currentlyActive[0], active: false };
-    newQuestions[nextIndex] = { ...newQuestions[activeIndex], active: true };
+    newQuestions[nextIndex] = { ...newQuestions[nextIndex], active: true };
     setQuestions(newQuestions);
+  };
+
+  const navigationPreviousDisabled = () => {
+    const currentlyActive = questions.filter((question) => question.active);
+    if (currentlyActive[0].id === 1) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const navigationNextDisabled = () => {
+    const currentlyActive = questions.filter((question) => question.active);
+    if (currentlyActive[0].id === questions[questions.length - 1].id) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const handleSelect = (id) => {
+    const newQuestions = cloneDeep(questions);
+    const currentlyActive = questions.filter((question) => question.active);
+    const activeIndex = currentlyActive[0].id - 1;
+    const newSelected = newQuestions[activeIndex].options[id - 1];
+    const previousSelected = currentlyActive[0].options.filter((option) => option.selected);
+
+    switch (currentlyActive[0].subtitle) {
+      case 'Select one':
+        if (previousSelected[0]) {
+          previousSelected[0].selected = !previousSelected[0].selected;
+        }
+        newSelected.selected = !newSelected.selected;
+        break;
+      default:
+        newSelected.selected = !newSelected.selected;
+        break;
+    }
+
+    switch (newSelected.title) {
+      case 'Custom Software Development':
+        setQuestions(softwareQuestions);
+        break;
+      case 'iOS/Android App Development':
+        setQuestions(softwareQuestions);
+        break;
+      case 'Website Development':
+        setQuestions(websiteQuestions);
+        break;
+
+      default:
+        setQuestions(newQuestions);
+    }
   };
 
   return (
     <Grid container direction='row'>
-      <Grid item container mt={2} mb={25} alignItems='center'>
-        <Grid item mt={2} pl={5} direction='column' lg={6}>
+      {/*  */}
+      <Grid item container direction='column' lg>
+        <Grid item style={{ marginTop: '2em', marginLeft: '5em' }}>
           <Typography variant='h2'>Estimate</Typography>
-          <Grid item style={{ marginRight: '10em', maxWidth: '50em', marginTop: '5em' }}>
-            <Lottie options={defaultOptions} height='100%' width='100%' />
-          </Grid>
         </Grid>
+        <Grid item style={{ marginRight: '10em', maxWidth: '50em', marginTop: '7.5em' }}>
+          <Lottie options={defaultOptions} width='100%' height='100%' />
+        </Grid>
+      </Grid>
+      {/*  */}
+      <Grid
+        item
+        container
+        alignItems='center'
+        direction='column'
+        lg
+        style={{ marginRight: '2em', marginBottom: '25em' }}
+      >
+        {questions
+          .filter((question) => question.active)
+          .map((question, index) => (
+            <React.Fragment key={index}>
+              <Grid item>
+                <Typography
+                  variant='h2'
+                  alignItems='center'
+                  gutterBottom
+                  style={{
+                    fontWeight: 500,
+                    marginTop: '5em',
+                    fontSize: '1.25rem',
+                    lineHeight: '1.25',
+                  }}
+                >
+                  {question.title}
+                </Typography>
+                <Typography
+                  variant='body1'
+                  align='center'
+                  style={{ marginBottom: '2.5' }}
+                  gutterBottom
+                >
+                  {question.subtitle}
+                </Typography>
+              </Grid>
 
-        <Grid item direction='column' lg={6}>
-          {defaultQuestions
-            .filter((question) => question.active)
-            .map((question, index) => (
-              <React.Fragment key={index}>
-                {' '}
-                <Grid item>
-                  <Typography
-                    variant='h2'
-                    textAlign='center'
-                    style={{ fontWeight: ' 500em', marginBottom: '2.5em', marginTop: '4.5em' }}
-                    gutterBottom
+              <Grid item container>
+                {question.options.map((option) => (
+                  <Grid
+                    container
+                    direction='column'
+                    md
+                    onClick={() => handleSelect(option.id)}
+                    component={Button}
+                    style={{
+                      display: 'grid',
+                      borderRadius: 0,
+                      textTransform: 'none',
+                      backgroundColor: option.selected ? theme.palette.common.orange : null,
+                    }}
                   >
-                    {question.title}
-                  </Typography>
-                  <Typography
-                    variant='body1'
-                    alignItems='center'
-                    style={{ marginBottom: '2.5em' }}
-                    gutterBottom
-                  >
-                    {question.subtitle}
-                  </Typography>
-                </Grid>
-                <Grid item container>
-                  {question.options.map((option) => (
-                    <Grid item container direction='column' md>
-                      <Grid item style={{ maxWidth: '12em' }}>
-                        <Typography
-                          variant='h6'
-                          alignItems='center'
-                          style={{ marginBottom: ' 1em' }}
-                        >
-                          {option.title}
-                        </Typography>
-                        <Typography variant='caption' alignItems='center'>
-                          {option.subtitle}
-                        </Typography>
-                      </Grid>
-
-                      <Grid item>
-                        <img src={option.icon} alt={option.iconAlt} className={classes.icon} />
-                      </Grid>
+                    <Grid item style={{ maxWidth: '14em' }}>
+                      <Typography
+                        variant='h6'
+                        align='center'
+                        gutterBottom
+                        style={{ marginBottom: '1em' }}
+                      >
+                        {option.title}
+                      </Typography>
+                      <Typography variant='caption' align='center'>
+                        {option.subtitle}
+                      </Typography>
                     </Grid>
-                  ))}
-                </Grid>
-              </React.Fragment>
-            ))}
-          <Grid item container justifyContent='space-between'>
-            <Grid item>
-              <IconButton onClick={previosQuestion}>
-                {' '}
-                <img src={backArrow} alt='backArrow' />
-              </IconButton>
-            </Grid>
-            <Grid item>
-              <IconButton onClick={nextQuestion}>
-                {' '}
-                <img src={forwardArrow} alt='forwardArrow' />
-              </IconButton>
-            </Grid>
+                    <Grid item>
+                      <img src={option.icon} alt={option.iconAlt} className={classes.icon} />
+                    </Grid>
+                  </Grid>
+                ))}
+              </Grid>
+            </React.Fragment>
+          ))}
+
+        <Grid
+          item
+          container
+          justifyContent='space-between'
+          style={{ width: '18em', marginTop: '3em' }}
+        >
+          <Grid item>
+            <IconButton disabled={navigationPreviousDisabled()} onClick={previousQuestion}>
+              <img
+                src={navigationPreviousDisabled() ? backArrowDisabled : backArrow}
+                alt='previos question'
+              />
+            </IconButton>
           </Grid>
           <Grid item>
-            <Button variant='contained' className={classes.estimateButton}>
-              Get Estimate
-            </Button>
+            <IconButton onClick={nextQuestion} disabled={navigationNextDisabled()}>
+              <img
+                src={navigationNextDisabled() ? forwardArrowDisabled : forwardArrow}
+                alt='next question'
+              />
+            </IconButton>
           </Grid>
+        </Grid>
+        <Grid item mt={3}>
+          <Button variant='contained' className={classes.estimateButton}>
+            Get estimate
+          </Button>
         </Grid>
       </Grid>
     </Grid>
   );
-};
+}
 
 export default Estimate;
