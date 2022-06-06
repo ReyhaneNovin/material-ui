@@ -16,8 +16,6 @@ import maintain from '../assets/images/maintainIcon.svg';
 import iterate from '../assets/images/iterateIcon.svg';
 import technologyAnimation from '../animations/technologyAnimation/data.json';
 
-import CallToAction from './ui/CallToAction';
-
 const useStyles = makeStyles((theme) => ({
   rowContainer: {
     paddingLeft: '5em',
@@ -219,10 +217,10 @@ function Revolution() {
           </Grid>
         </Grid>
         <Grid item lg style={{ alignSelf: 'center' }}>
-          <img src={consultation} alt='handshake' width='100%' style={{ maxWidth: 700 }} />
+          <img src={consultation} alt='handshake' width='100%' style={{ maxWidth: 500 }} />
         </Grid>
       </Grid>
-      {/*  mockup*/}
+
       <Grid
         item
         container
@@ -275,10 +273,10 @@ function Revolution() {
           </Grid>
         </Grid>
         <Grid item lg style={{ alignSelf: 'center' }}>
-          <img src={mockup} alt='handshake' width='100%' style={{ maxWidth: 700 }} />
+          <img src={mockup} alt='handshake' width='100%' style={{ maxWidth: 500 }} />
         </Grid>
       </Grid>
-      {/* design */}
+
       <Grid
         item
         container
@@ -331,7 +329,7 @@ function Revolution() {
           </Grid>
         </Grid>
         <Grid item lg style={{ alignSelf: 'center' }}>
-          <img src={design} alt='handshake' width='100%' style={{ maxWidth: 700 }} />
+          <img src={design} alt='handshake' width='100%' style={{ maxWidth: 500 }} />
         </Grid>
       </Grid>
 
@@ -387,7 +385,7 @@ function Revolution() {
           </Grid>
         </Grid>
         <Grid item lg style={{ alignSelf: 'center' }}>
-          <img src={review} alt='handshake' width='100%' style={{ maxWidth: 700 }} />
+          <img src={review} alt='handshake' width='100%' style={{ maxWidth: 500 }} />
         </Grid>
       </Grid>
 
@@ -443,10 +441,10 @@ function Revolution() {
           </Grid>
         </Grid>
         <Grid item lg style={{ alignSelf: 'center' }}>
-          <img src={build} alt='handshake' width='100%' style={{ maxWidth: 700 }} />
+          <img src={build} alt='handshake' width='100%' style={{ maxWidth: 500 }} />
         </Grid>
       </Grid>
-      {/* launch */}
+
       <Grid
         item
         container
@@ -555,7 +553,7 @@ function Revolution() {
           </Grid>
         </Grid>
         <Grid item lg style={{ alignSelf: 'center' }}>
-          <img src={maintain} alt='handshake' width='100%' style={{ maxWidth: 700 }} />
+          <img src={maintain} alt='handshake' width='100%' style={{ maxWidth: 500 }} />
         </Grid>
       </Grid>
 
@@ -611,7 +609,7 @@ function Revolution() {
           </Grid>
         </Grid>
         <Grid item lg style={{ alignSelf: 'center' }}>
-          <img src={iterate} alt='handshake' width='100%' style={{ maxWidth: 700 }} />
+          <img src={iterate} alt='handshake' width='100%' style={{ maxWidth: 500 }} />
         </Grid>
       </Grid>
     </Grid>
