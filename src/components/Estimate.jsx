@@ -5,10 +5,13 @@ import IconButton from '@mui/material/IconButton';
 import { Button } from '@mui/material';
 import Lottie from 'react-lottie';
 import { cloneDeep } from 'lodash';
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import { Dialog } from '@mui/material';
 import { DialogContent } from '@mui/material';
 import TextField from '@mui/material/TextField';
+import { Snackbar } from '@mui/material';
+import { CircularProgress } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 import check from '../assets/images/check.svg';
 import send from '../assets/images/send.svg';
@@ -35,11 +38,11 @@ import data from '../assets/images/data.svg';
 import android from '../assets/images/android.svg';
 import globe from '../assets/images/globe.svg';
 import biometrics from '../assets/images/biometrics.svg';
+import airplane from '../assets/images/send.svg';
 
 import estimateAnimation from '../animations/estimateAnimation/data.json';
-
+import axios from 'axios';
 import React from 'react';
-import { maxWidth } from '@mui/system';
 
 const useStyle = makeStyles((theme) => ({
   icon: {
@@ -330,6 +333,9 @@ function Estimate() {
   const classes = useStyle();
   const theme = useTheme();
 
+  const machesMD = useMediaQuery(theme.breakpoints.down('md'));
+  const machesSM = useMediaQuery(theme.breakpoints.down('sm'));
+
   const [questions, setQuestions] = useState(defaultQuestions);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [name, setName] = useState('');
@@ -348,6 +354,9 @@ function Estimate() {
   const [customFeatures, setCustomFeatures] = useState('');
   const [category, setCategory] = useState('');
   const [users, setUsers] = useState('');
+
+  const [alert, setAlert] = useState({ open: false, message: '', backgroundColor: '' });
+  const [loading, setLoading] = useState(false);
 
   const defaultOptions = {
     loop: true,
@@ -529,109 +538,55 @@ function Estimate() {
     }
   };
 
-  const SoftwareSelection = (
-    <Grid container direction='column'>
-      <Grid item container alignItems='center' style={{ marginBottom: '1.25em' }}>
-        <Grid item xs={1}>
-          <img src={check} alt='check' />
-        </Grid>
-        <Grid item xs={10}>
-          <Typography variant='body1'>
-            You want {service}
-            {platforms.length > 0
-              ? `for ${
-                  //if only web application is selected...
-                  platforms.indexOf('Web Application') > -1 && platforms.length === 1
-                    ? //then finish sentence here
-                      'a Web Application.'
-                    : //otherwise, if web application and another platform is selected...
-                    platforms.indexOf('Web Application') > -1 && platforms.length === 2
-                    ? //then finish the sentence here
-                      `a Web Application and an ${platforms[1]}.`
-                    : //otherwise, if only one platform is selected which isn't web application...
-                    platforms.length === 1
-                    ? //then finish the sentence here
-                      `an ${platforms[0]}`
-                    : //otherwise, if other two options are selected...
-                    platforms.length === 2
-                    ? //then finish the sentence here
-                      'an iOS Application and an Android Application.'
-                    : //otherwise if all three are selected...
-                    platforms.length === 3
-                    ? //then finish the sentence here
-                      'a Web Application, an iOS Application, and an Android Application.'
-                    : null
-                }`
-              : null}
-          </Typography>
-        </Grid>
-      </Grid>
-      <Grid item container alignItems='center'>
-        <Grid item>
-          <img src={check} alt='check' />
-        </Grid>
-        <Grid item>
-          <Typography variant='body1'>
-            {' '}
-            {'with '}
-            with GPS ,Photo/Video and File Transfer
-            {/* if we have features... */}
-            {features.length > 0
-              ? //...and there's only 1...
-                features.length === 1
-                ? //then end the sentence here
-                  `${features[0]}.`
-                : //otherwise, if there are two features...
-                features.length === 2
-                ? //...then end the sentence here
-                  `${features[0]} and ${features[1]}.`
-                : //otherwise, if there are three or more features...
-                  features
-                    //filter out the very last feature...
-                    .filter((feature, index) => index !== features.length - 1)
-                    //and for those features return their name...
-                    .map((feature, index) => <span key={index}>{`${feature}, `}</span>)
-              : null}
-            {features.length > 2
-              ? //...and then finally add the last feature with 'and' in front of it
-                ` and ${features[features.length - 1]}.`
-              : null}
-          </Typography>
-        </Grid>
-      </Grid>
-      <Grid item container alignItems='center'>
-        <Grid item>
-          <img src={check} alt='check' />
-        </Grid>
-        <Grid item>
-          <Typography variant='body1'>
-            The custom Features {customFeatures.toLowerCase()}
-            {`,and the project will be used by about ${users} users.`}
-          </Typography>
-        </Grid>
-      </Grid>
-    </Grid>
-  );
-  const webSiteSelection = (
-    <Grid container direction='column'>
-      <Grid item container alignItems='center' style={{ marginBottom: '1.25em' }}>
-        <Grid item xs={1}>
-          <img src={check} alt='check' />
-        </Grid>
-        <Grid item xs={10}>
-          <Typography variant='body1'>
-            you want {category === 'Basic' ? 'a Basic website' : `an ${category}Website.`}
-          </Typography>
-        </Grid>
-      </Grid>
-    </Grid>
+  const sendEstimate = () => {
+    setLoading(true);
+
+    axios
+      .get('https://jsonplaceholder.typicode.com/users', {
+        params: {
+          email: email,
+          name: name,
+          phone: phone,
+          message: message,
+          total: total,
+          category: category,
+          service: service,
+          platforms: platforms,
+          features: features,
+          customFeatures: customFeatures,
+          users: users,
+        },
+      })
+
+      .then((res) => {
+        setLoading(false);
+
+        setDialogOpen(false);
+        setAlert({ open: true, message: 'Message sent Successfuly', backgroundColor: '#4BB543' });
+      })
+      .catch((err) => {
+        setLoading(false);
+        setAlert({
+          open: true,
+          message: 'something went wrong ,please try again',
+          backgroundColor: '#FF3232',
+        });
+      });
+  };
+  const buttonContants = (
+    <>
+      send Message
+      <img src={airplane} alt='airplane' style={{ marginLeft: '1em' }} />
+    </>
   );
   return (
     <Grid container direction='row'>
       {/*  */}
       <Grid item container direction='column' lg>
         <Grid item style={{ marginTop: '2em', marginLeft: '5em' }}>
-          <Typography variant='h2'>Estimate</Typography>
+          <Typography variant='h2' align={machesMD ? 'center' : undefined}>
+            Estimate
+          </Typography>
         </Grid>
         <Grid item style={{ marginRight: '10em', maxWidth: '50em', marginTop: '7.5em' }}>
           <Lottie options={defaultOptions} width='100%' height='100%' />
@@ -644,7 +599,7 @@ function Estimate() {
         alignItems='center'
         direction='column'
         lg
-        style={{ marginRight: '2em', marginBottom: '25em' }}
+        style={{ marginRight: machesMD ? 0 : '2em', marginBottom: '15em' }}
       >
         {questions
           .filter((question) => question.active)
@@ -753,21 +708,22 @@ function Estimate() {
       </Grid>
       <Dialog
         open={dialogOpen}
+        fullScreen={machesSM}
         onClose={() => setDialogOpen(false)}
         fullWidth
         maxWidth='lg'
         PaperProps={{
           style: {
-            paddingTop: '2em',
-            paddingBottom: '2em',
-            paddingLeft: '5em',
-            paddingRight: '5em',
+            paddingTop: machesMD ? '0' : '3em',
+            paddingBottom: machesMD ? '0' : '3em',
+            paddingLeft: machesMD ? '0' : '5em',
+            paddingRight: machesMD ? '0' : '5em',
           },
         }}
       >
         <Grid container justifyContent='center'>
           <Grid item>
-            <Typography variant='h2' alignItems='center'>
+            <Typography variant='h2' alignItems={machesMD ? 'center' : undefined}>
               Estimate
             </Typography>
           </Grid>
@@ -827,26 +783,124 @@ function Estimate() {
               </Grid>
               <Grid item>
                 <Typography variant='body1' paragraph>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, consequatur rerum.
-                  <span className={classes.specialText}>${total.toFixed(2)}</span>
+                  we can create this digital solution for an estimated
+                  <span className={classes.specialText}>
+                    ${total.toFixed(2)}
+                    {platforms.length > 0
+                      ? `for ${
+                          //if only web application is selected...
+                          platforms.indexOf('Web Application') > -1 && platforms.length === 1
+                            ? //then finish sentence here
+                              'a Web Application.'
+                            : //otherwise, if web application and another platform is selected...
+                            platforms.indexOf('Web Application') > -1 && platforms.length === 2
+                            ? //then finish the sentence here
+                              `a Web Application and an ${platforms[1]}.`
+                            : //otherwise, if only one platform is selected which isn't web application...
+                            platforms.length === 1
+                            ? //then finish the sentence here
+                              `an ${platforms[0]}`
+                            : //otherwise, if other two options are selected...
+                            platforms.length === 2
+                            ? //then finish the sentence here
+                              'an iOS Application and an Android Application.'
+                            : //otherwise if all three are selected...
+                            platforms.length === 3
+                            ? //then finish the sentence here
+                              'a Web Application, an iOS Application, and an Android Application.'
+                            : null
+                        }`
+                      : null}
+                  </span>
                 </Typography>
                 <Typography variant='body1' paragraph>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, consequatur rerum.
+                  Fill out your name, number, and email, place your request, and we’ll get back to
+                  you with details moving forward and a final price.
                 </Typography>
               </Grid>
             </Grid>
-            <Grid item container direction='column' md={5} pt={10}>
-              <Grid item>{questions.length > 2 ? SoftwareSelection : webSiteSelection}</Grid>
-              <Grid item>
-                <Button variant='contained' className={classes.estimateButton}>
-                  Place Request
-                  <img src={send} alt='airplane' style={{ marginLeft: '0.5em' }} />
-                </Button>
+            <Grid item md={5} mt={5}>
+              <Grid item container>
+                <Grid item container alignItems='center'>
+                  <Grid item xs={2}>
+                    <img src={check} alt='checkmark' width='20' />
+                  </Grid>
+                  <Grid item xs={10}>
+                    <Typography variant='body1'>you want {service} </Typography>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <img src={check} alt='checkmark' width='20' />
+                  </Grid>
+                  <Grid item xs={10}>
+                    <Typography variant='body1'>
+                      {'with '}
+
+                      {/* if we have features... */}
+                      {features.length > 0
+                        ? //...and there's only 1...
+                          features.length === 1
+                          ? //then end the sentence here
+                            `${features[0]}.`
+                          : //otherwise, if there are two features...
+                          features.length === 2
+                          ? //...then end the sentence here
+                            `${features[0]} and ${features[1]}.`
+                          : //otherwise, if there are three or more features...
+                            features
+                              //filter out the very last feature...
+                              .filter((feature, index) => index !== features.length - 1)
+                              //and for those features return their name...
+                              .map((feature, index) => <span key={index}>{`${feature}, `}</span>)
+                        : null}
+                      {features.length > 2
+                        ? //...and then finally add the last feature with 'and' in front of it
+                          ` and ${features[features.length - 1]}.`
+                        : null}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={2}>
+                    <img src={check} alt='checkmark' width='20' />
+                  </Grid>
+                  <Grid item xs={10}>
+                    <Typography variant='body1'>
+                      Thired{customFeatures.toLowerCase()}
+                      {`project while be used${users} user`}
+                    </Typography>
+                  </Grid>
+                </Grid>
+                <Grid item mt={3}>
+                  <Button
+                    onClick={sendEstimate}
+                    variant='contained'
+                    className={classes.estimateButton}
+                  >
+                    {loading ? <CircularProgress size={50} color='success' /> : buttonContants}
+                  </Button>
+                </Grid>
+
+                <Grid item mt={3} style={{ marginBottom: machesSM ? '5em' : 0 }}>
+                  <Button
+                    style={{ fontWeight: 300 }}
+                    color='primary'
+                    onClick={() => setDialogOpen(false)}
+                  >
+                    Cancel
+                  </Button>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
         </DialogContent>
       </Dialog>
+
+      <Snackbar
+        open={alert.open}
+        message={alert.message}
+        ContentProps={{ style: { backgroundColor: alert.backgroundColor } }}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        onClose={() => setAlert({ ...alert, open: false })}
+        autoHideDuration={4000}
+      ></Snackbar>
     </Grid>
   );
 }

@@ -1,19 +1,19 @@
-import "./App.css";
-import { useState } from "react";
-import { ThemeProvider } from "@mui/material";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import './App.css';
+import { useState } from 'react';
+import { ThemeProvider } from '@mui/material';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import theme from "./ui/Theme";
+import theme from './ui/Theme';
 
-import Header from "./ui/Header";
-import Footer from "./ui/Footer";
-import LandingPage from "./LandingPage";
-import Services from "./Services";
-import CustomSoftware from "./CustomSoftware";
-import About from "./About";
-import Contact from "./Contact";
-import Estimate from "./Estimate";
-
+import Header from './ui/Header';
+import Footer from './ui/Footer';
+import LandingPage from './LandingPage';
+import Services from './Services';
+import CustomSoftware from './CustomSoftware';
+import About from './About';
+import Contact from './Contact';
+import Estimate from './Estimate';
+import Revolution from './Revolution';
 function App() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [value, setValue] = useState(0);
@@ -27,15 +27,37 @@ function App() {
           setSelectedIndex={setSelectedIndex}
         />
         <Routes>
-          <Route exact path="/" element={<LandingPage setValue={setValue} setSelectedIndex={setSelectedIndex}/>} />
-          <Route path="/services" element={<Services setValue={setValue} setSelectedIndex={setSelectedIndex}/>} />
-          <Route path="/revolution" element={<>revolution</>} />
-          <Route path="/estimate" element={<Estimate setValue={setValue} setSelectedIndex={setSelectedIndex}/>} />
-          <Route path="/about" element={<About setValue={setValue} setSelectedIndex={setSelectedIndex}/>} />
-          <Route path="/contact" element={<Contact setValue={setValue} setSelectedIndex={setSelectedIndex}/>} />
-          <Route path="/customsoftware" element={<CustomSoftware setValue={setValue} setSelectedIndex={setSelectedIndex}/>} />
-          <Route path="/mobileapps" element={<>mobileappst</>} />
-          <Route path="/websites" element={<>websites</>} />
+          <Route
+            exact
+            path='/'
+            element={<LandingPage setValue={setValue} setSelectedIndex={setSelectedIndex} />}
+          />
+          <Route
+            path='/services'
+            element={<Services setValue={setValue} setSelectedIndex={setSelectedIndex} />}
+          />
+          <Route
+            path='/revolution'
+            element={<Revolution setValue={setValue} setSelectedIndex={setSelectedIndex} />}
+          />
+          <Route
+            path='/estimate'
+            element={<Estimate setValue={setValue} setSelectedIndex={setSelectedIndex} />}
+          />
+          <Route
+            path='/about'
+            element={<About setValue={setValue} setSelectedIndex={setSelectedIndex} />}
+          />
+          <Route
+            path='/contact'
+            element={<Contact setValue={setValue} setSelectedIndex={setSelectedIndex} />}
+          />
+          <Route
+            path='/customsoftware'
+            element={<CustomSoftware setValue={setValue} setSelectedIndex={setSelectedIndex} />}
+          />
+          <Route path='/mobileapps' element={<>mobileappst</>} />
+          <Route path='/websites' element={<>websites</>} />
         </Routes>
         <Footer
           value={value}
