@@ -13,6 +13,7 @@ import integrationAnimation from '../animations/integrationAnimation/data.json';
 import swissKnife from '../assets/images/swissKnife.svg';
 import extendAccess from '../assets/images/extendAccess.svg';
 import increaseEngagement from '../assets/images/increaseEngagement.svg';
+import { CallToAction } from '@mui/icons-material';
 const useStyles = makeStyles((theme) => ({
   heading: {
     maxWidth: '40em !important',
@@ -35,6 +36,7 @@ const MobileApps = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const matchesMD = useMediaQuery(theme.breakpoints.down('md'));
+  const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
   const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
   const defaultOption = {
     loop: true,
@@ -61,7 +63,7 @@ const MobileApps = (props) => {
             <img src={backArrow} alt='Back to customsoftware page' />
           </IconButton>
         </Grid>
-        <Grid item container direction='column' className={classes.heading}>
+        <Grid item container direction='column' className={classes.heading} justifyContent='center'>
           <Grid item>
             <Typography variant='h2'>IOS/Android APP development</Typography>
           </Grid>
@@ -103,10 +105,16 @@ const MobileApps = (props) => {
           </IconButton>
         </Grid>
       </Grid>
-      <Grid item container direction='row' className={classes.rowContainer}>
-        <Grid item container direction='column' md>
+      <Grid
+        item
+        container
+        direction={matchesSM ? 'column' : 'row'}
+        className={classes.rowContainer}
+        style={{ marginTop: '15em', marginBottom: '15em' }}
+      >
+        <Grid item container direction='column' md textAlign='center'>
           <Grid item>
-            <Typography variant='h4' gutterBottom>
+            <Typography variant='h4' gutterBottom alignItems={matchesSM ? 'center' : undefined}>
               INTEGERAITION
             </Typography>
           </Grid>
@@ -126,7 +134,7 @@ const MobileApps = (props) => {
         <Grid item md>
           <Lottie options={defaultOption} style={{ maxWidth: '20em' }} />
         </Grid>
-        <Grid item container direction='column' md>
+        <Grid item container direction='column' md textAlign='center'>
           <Grid item>
             <Typography variant='h4' gutterBottom>
               Simulaton Platforms support
@@ -146,10 +154,15 @@ const MobileApps = (props) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item container direction='row' className={classes.rowContainer}>
-        <Grid item container direction='column' md>
+      <Grid
+        item
+        container
+        direction={matchesMD ? 'column' : 'row'}
+        className={classes.rowContainer}
+      >
+        <Grid item container direction='column' md alignItems='center'>
           <Grid item>
-            <Typography variant='h4' gutterBottom>
+            <Typography variant='h4' gutterBottom textAlign='center'>
               Extend Functionality
             </Typography>
           </Grid>
@@ -157,19 +170,26 @@ const MobileApps = (props) => {
             <img src={swissKnife} alt='swiss' />
           </Grid>
         </Grid>
-        <Grid item container direction='column' md>
+        <Grid
+          item
+          container
+          direction='column'
+          alignItems='center'
+          md
+          style={{ marginTop: matchesMD ? '10em' : 0, marginBottom: matchesMD ? '10em' : 0 }}
+        >
           <Grid item>
-            <Typography variant='h4' gutterBottom>
+            <Typography variant='h4' gutterBottom textAlign='center'>
               Extend Access
             </Typography>
           </Grid>
           <Grid item>
-            <img src={extendAccess} alt='extendAccess' />
+            <img src={extendAccess} alt='extendAccess' style={{ maxWidth: '28em' }} />
           </Grid>
         </Grid>
-        <Grid item container direction='column' md>
+        <Grid item container direction='column' md alignItems='center'>
           <Grid item>
-            <Typography variant='h4' gutterBottom>
+            <Typography variant='h4' gutterBottom textAlign='center'>
               Extend Engagment
             </Typography>
           </Grid>
@@ -177,6 +197,9 @@ const MobileApps = (props) => {
             <img src={increaseEngagement} alt='increaseEngagement' />
           </Grid>
         </Grid>
+      </Grid>
+      <Grid item>
+        <CallToAction setValue={props.setValue} />
       </Grid>
     </Grid>
   );
