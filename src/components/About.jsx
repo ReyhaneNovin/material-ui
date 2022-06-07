@@ -91,7 +91,7 @@ const About = () => {
         </Grid>
       </Grid>
 
-      <Grid item container justifyContent='center' className={classes.rowContainer}>
+      <Grid item container direction='column' textAlign='center' className={classes.rowContainer}>
         <Grid item>
           <Typography variant='h4' gutterBottom>
             Team
@@ -106,29 +106,35 @@ const About = () => {
           </Typography>
         </Grid>
 
-        <Grid item>
+        <Grid item alignSelf='center'>
           <Avatar alt='founder' src={founder} className={classes.avatar} />
         </Grid>
-        <Grid item container direction='row'>
-          <Grid item container lg={6}>
-            <Grid item>
-              <img src={yearbook} alt='yearbook page' />
-            </Grid>
-            <Grid item>
-              <Typography variant='caption'>page from yearbook</Typography>
-            </Grid>
+      </Grid>
+      <Grid item container direction='row' pb={10} className={classes.rowContainer}>
+        <Grid item container lg={4}>
+          <Grid item>
+            <img src={yearbook} alt='yearbook page' />
+            <br />
+            <Typography textAlign='center'>Image from yearboob</Typography>
           </Grid>
-          <Grid item lg={6} pt={15}>
-            <Typography variant='body1' textAlign='center' paragraph>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non eum magnam itaque eaque
-              cum. Doloremque eveniet tempora, vel, minus aspernatur ipsam vitae recusandae vero
-              suscipit alias temporibus quam quas dicta?
-            </Typography>
-            <Typography variant='body1' textAlign='center' paragraph>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci ea minus asperiores
-              repellendus, deserunt eos dolores rerum dicta repudiandae dolore omnis, delectus
-              temporibus tenetur minima blanditiis! Voluptate esse vitae neque?
-            </Typography>
+        </Grid>
+        <Grid item container lg={4} pt={15}>
+          <Typography variant='body1' textAlign='center' paragraph>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non eum magnam itaque eaque
+            cum. Doloremque eveniet tempora, vel, minus aspernatur ipsam vitae recusandae vero
+            suscipit alias temporibus quam quas dicta?
+          </Typography>
+          <Typography variant='body1' textAlign='center' paragraph>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci ea minus asperiores
+            repellendus, deserunt eos dolores rerum dicta repudiandae dolore omnis, delectus
+            temporibus tenetur minima blanditiis! Voluptate esse vitae neque?
+          </Typography>
+        </Grid>
+        <Grid item container lg={4}>
+          <Grid item direction='rtl'>
+            <img src={puppy} alt='puppy' />
+            <br />
+            <Typography textAlign='center'>Image from pupy</Typography>
           </Grid>
         </Grid>
       </Grid>

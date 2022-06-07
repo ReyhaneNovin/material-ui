@@ -199,7 +199,7 @@ const CustomSoftware = (props) => {
         </Grid>
         <Grid item container className={classes.itemContainer} lg={6}>
           <Grid item md direction='column'>
-            <Lottie options={scaleOption} style={{ maxHeight: '260px', maxWidth: '275px' }} />
+            <Lottie options={scaleOption} style={{ maxHeight: '275px', maxWidth: '275px' }} />
           </Grid>
           <Grid item container direction='column' md>
             <Grid item>
@@ -278,10 +278,7 @@ const CustomSoftware = (props) => {
             </Grid>
           </Grid>
           <Grid item md>
-            <Lottie
-              options={automationOption}
-              style={{ maxHeight: '275px', maxWidth: '275px', minHeight: '250px' }}
-            />
+            <Lottie options={automationOption} style={{ maxHeight: '275px', maxWidth: '275px' }} />
           </Grid>
         </Grid>
         <Grid item container className={classes.itemContainer} direction='column'>
@@ -307,8 +304,8 @@ const CustomSoftware = (props) => {
               </Typography>
             </Grid>
           </Grid>
-          <Grid item md>
-            <Lottie options={uxOption} style={{ maxHeight: '260px', maxWidth: '275px' }} />
+          <Grid item md className={classes.lottieWrapper}>
+            <Lottie options={uxOption} style={{ maxHeight: '310px', maxWidth: '155px' }} />
           </Grid>
         </Grid>
       </Grid>

@@ -14,7 +14,7 @@ import { CircularProgress } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import check from '../assets/images/check.svg';
-import send from '../assets/images/send.svg';
+
 import software from '../assets/images/software.svg';
 import mobile from '../assets/images/mobile.svg';
 import website from '../assets/images/website.svg';
