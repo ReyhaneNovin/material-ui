@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '0.5em',
   },
   mainContainer: {
-    paddingLeft: '5em !important',
-    paddingRight: '5em !important',
+    paddingLeft: '1em !important',
+    paddingRight: '1em !important',
     paddingTop: '2em !important',
     paddingBottom: '10em  !important',
   },
