@@ -1,100 +1,100 @@
-import React, { useEffect, useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import useScrollTrigger from "@mui/material/useScrollTrigger";
-import logo from "../../assets/images/logo.svg";
-import { makeStyles } from "@mui/styles";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import MenuIcon from "@mui/icons-material/Menu";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import zIndex from "@mui/material/styles/zIndex";
+import React, { useEffect, useState } from 'react';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
+import logo from '../../assets/images/logo.svg';
+import { makeStyles } from '@mui/styles';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import MenuIcon from '@mui/icons-material/Menu';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import zIndex from '@mui/material/styles/zIndex';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: "linear-gradient(to right, #000000, #4286f4)",
+    background: 'linear-gradient(to right, #000000, #4286f4)',
   },
   toolbarMargin: {
     ...theme.mixins.toolbar,
-    marginBottom: "3em",
-    [theme.breakpoints.down("md")]: {
-      height: "2em",
+    marginBottom: '3em',
+    [theme.breakpoints.down('md')]: {
+      height: '2em',
     },
-    [theme.breakpoints.down("xs")]: {
-      height: "1.25em !important",
+    [theme.breakpoints.down('xs')]: {
+      height: '1.25em !important',
     },
   },
   logo: {
-    height: "6em",
-    [theme.breakpoints.down("md")]: {
-      height: "5em",
+    height: '6em',
+    [theme.breakpoints.down('md')]: {
+      height: '5em',
     },
-    [theme.breakpoints.down("xs")]: {
-      height: "3.5em !important",
+    [theme.breakpoints.down('xs')]: {
+      height: '3.5em !important',
     },
   },
 
   tabContainer: {
-    marginLeft: "auto",
+    marginLeft: 'auto',
   },
   tab: {
     ...theme.typography.tab,
     minWidth: 10,
-    marginLeft: "25px",
+    marginLeft: '25px',
   },
   button: {
     ...theme.typography.estimate,
-    borderRadius: "20px  !important",
-    marginRight: "25px  !important",
-    marginLeft: "50px  !important",
-    height: "45px  !important",
-    width: "100px !important",
+    borderRadius: '20px  !important',
+    marginRight: '25px  !important',
+    marginLeft: '50px  !important',
+    height: '45px  !important',
+    // width: "100px !important",
   },
 
   logoContainer: {
     padding: 0,
-    "&:hover": { backgroundColor: "transparent" },
+    '&:hover': { backgroundColor: 'transparent' },
   },
   menu: {
     backgroundColor: theme.palette.common.red,
-    color: "black !important",
+    color: 'black !important',
   },
   menuItem: {
     ...theme.typography.tab,
-    "&:hover": {
+    '&:hover': {
       opacity: 1,
     },
   },
   drawerIconContainer: {
-    marginLeft: "auto !important",
-    "&:hover": {
-      backgroundColor: "transparent",
+    marginLeft: 'auto !important',
+    '&:hover': {
+      backgroundColor: 'transparent',
     },
   },
   drawerIcon: {
-    height: "40px !important",
-    width: "40px !important",
+    height: '40px !important',
+    // width: '40px !important',
   },
   drawer: {
     backgroundColor: theme.palette.common.red,
   },
   drawerItem: {
     ...theme.typography.tab,
-    color: "white",
+    color: 'white',
     opacity: 0.7,
   },
   drawerItemSelected: {
-    "& .MuiListItemText-root": { opacity: 1 },
+    '& .MuiListItemText-root': { opacity: 1 },
   },
   //   appbar:{
   //     zIndex:theme.zIndex.modal+1,
@@ -117,10 +117,8 @@ function ElevationScroll(props) {
 const Header = (props) => {
   const classes = useStyles();
   const theme = useTheme();
-  const iOS =
-    typeof navigator !== "undefined" &&
-    /iPad|iPhone|iPod/.test(navigator.userAgent);
-  const matches = useMediaQuery(theme.breakpoints.down("md"));
+  const iOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const matches = useMediaQuery(theme.breakpoints.down('md'));
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
@@ -146,40 +144,40 @@ const Header = (props) => {
   };
 
   const menuOptions = [
-    { name: "Services", link: "/services", activeIndex: 1, selectedIndex: 0 },
+    { name: 'Services', link: '/services', activeIndex: 1, selectedIndex: 0 },
     {
-      name: "Custom Software Development",
-      link: "/customsoftware",
+      name: 'Custom Software Development',
+      link: '/customsoftware',
       activeIndex: 1,
       selectedIndex: 1,
     },
     {
-      name: "Ios/Android development",
-      link: "/mobileapps",
+      name: 'Ios/Android development',
+      link: '/mobileapps',
       activeIndex: 1,
       selectedIndex: 2,
     },
     {
-      name: "Website development",
-      link: "/websites",
+      name: 'Website development',
+      link: '/websites',
       activeIndex: 1,
       selectedIndex: 3,
     },
   ];
 
   const routes = [
-    { name: "Home", link: "/", activeIndex: 0 },
+    { name: 'Home', link: '/', activeIndex: 0 },
     {
-      name: "Services",
-      link: "/services",
+      name: 'Services',
+      link: '/services',
       activeIndex: 1,
-      ariaOwns: anchorEl ? "basic-menu" : undefined,
-      ariaPopup: anchorEl ? "true" : undefined,
+      ariaOwns: anchorEl ? 'basic-menu' : undefined,
+      ariaPopup: anchorEl ? 'true' : undefined,
       onMouseOver: (event) => handleClick(event),
     },
-    { name: "Revolution", link: "/revolution", activeIndex: 2 },
-    { name: "About Us", link: "/about", activeIndex: 3 },
-    { name: "Contact Us", link: "/contact", activeIndex: 4 },
+    { name: 'Revolution', link: '/revolution', activeIndex: 2 },
+    { name: 'About Us', link: '/about', activeIndex: 3 },
+    { name: 'Contact Us', link: '/contact', activeIndex: 4 },
   ];
 
   useEffect(() => {
@@ -188,10 +186,7 @@ const Header = (props) => {
         case `${route.link}`:
           if (props.value !== route.activeIndex) {
             props.setValue(route.activeIndex);
-            if (
-              route.selectedIndex &&
-              route.selectedIndex !== props.selectedIndex
-            ) {
+            if (route.selectedIndex && route.selectedIndex !== props.selectedIndex) {
               props.setSelectedIndex(route.selectedIndex);
             }
           }
@@ -208,7 +203,7 @@ const Header = (props) => {
         value={props.value}
         onChange={handleChange}
         className={classes.tabContainer}
-        indicatorColor="primary"
+        indicatorColor='primary'
       >
         {routes.map((route, index) => (
           <Tab
@@ -223,11 +218,17 @@ const Header = (props) => {
           />
         ))}
       </Tabs>
-      <Button variant="contained"  color="primary" className={classes.button} component={Link} to="/estimate">
+      <Button
+        variant='contained'
+        color='primary'
+        className={classes.button}
+        component={Link}
+        to='/estimate'
+      >
         Estimate
       </Button>
       <Menu
-        id="basic-menu"
+        id='basic-menu'
         anchorEl={anchorEl}
         open={openMenu}
         onClose={handleClose}
@@ -239,7 +240,7 @@ const Header = (props) => {
       >
         {menuOptions.map((option, index) => (
           <MenuItem
-            key={"${option}${i}"}
+            key={'${option}${i}'}
             component={Link}
             to={option.link}
             classes={{ root: classes.menuItem }}
@@ -302,17 +303,17 @@ const Header = (props) => {
   return (
     <>
       <ElevationScroll {...props}>
-        <AppBar position="static" className={classes.appbar}>
+        <AppBar position='static' className={classes.appbar}>
           <Toolbar className={classes.root}>
             <Button
               component={Link}
-              to="/"
+              to='/'
               className={classes.logoContainer}
               onClick={() => props.setValue(0)}
               disableRipple
             >
-              {" "}
-              <img alt="compony logo " src={logo} className={classes.logo} />
+              {' '}
+              <img alt='compony logo ' src={logo} className={classes.logo} />
             </Button>
 
             {matches ? drawer : tabs}

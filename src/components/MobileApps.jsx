@@ -13,7 +13,7 @@ import integrationAnimation from '../animations/integrationAnimation/data.json';
 import swissKnife from '../assets/images/swissKnife.svg';
 import extendAccess from '../assets/images/extendAccess.svg';
 import increaseEngagement from '../assets/images/increaseEngagement.svg';
-import { CallToAction } from '@mui/icons-material';
+import CallToAction from './ui/CallToAction';
 const useStyles = makeStyles((theme) => ({
   heading: {
     maxWidth: '40em !important',
