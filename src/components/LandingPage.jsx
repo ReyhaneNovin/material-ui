@@ -131,7 +131,7 @@ const LandingPage = (props) => {
               <Grid item>
                 <Button variant='outlined' component={Link} to='/'>
                   <span style={{ marginRight: '10px' }}>Learn more</span>{' '}
-                  <ButtonArrow width={20} height={20} fill='violet' />
+                  <ButtonArrow width={20} height={20} fill={theme.palette.common.red} />
                 </Button>
               </Grid>
             </Grid>
@@ -170,7 +170,7 @@ const LandingPage = (props) => {
               to='/customsoftware'
             >
               <span style={{ marginRight: '10px' }}>Learn more</span>{' '}
-              <ButtonArrow width={20} height={20} fill='violet' />
+              <ButtonArrow width={20} height={20} fill={theme.palette.common.red} />
             </Button>
           </Grid>
           <Grid item>
@@ -207,7 +207,7 @@ const LandingPage = (props) => {
               className={classes.learnMoreBtn}
             >
               <span style={{ marginRight: '10px' }}>Learn more</span>{' '}
-              <ButtonArrow width={20} height={20} fill='violet' />
+              <ButtonArrow width={20} height={20} fill={theme.palette.common.red} />
             </Button>
           </Grid>
           <Grid item>
@@ -244,7 +244,7 @@ const LandingPage = (props) => {
               to='/websites'
             >
               <span style={{ marginRight: '10px' }}>Learn more</span>{' '}
-              <ButtonArrow width={20} height={20} fill='violet' />
+              <ButtonArrow width={20} height={20} fill={theme.palette.common.red} />
             </Button>
           </Grid>
           <Grid item>
@@ -272,7 +272,7 @@ const LandingPage = (props) => {
                   </Typography>
                   <Button variant='outlined' component={Link} to='/revolution'>
                     <span style={{ marginRight: '10px' }}>Learn more</span>{' '}
-                    <ButtonArrow width={20} height={20} fill='violet' />
+                    <ButtonArrow width={20} height={20} fill={theme.palette.common.red} />
                   </Button>
                 </Grid>
               </Grid>

@@ -2,11 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles, useTheme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
-import Lottie from 'react-lottie';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Hidden from '@mui/material/Hidden';
+import { Hidden } from '@mui/material';
 import backArrow from '../assets/images/backArrow.svg';
 import forwardArrow from '../assets/images/forwardArrow.svg';
 import analytics from '../assets/images/analytics.svg';
@@ -23,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '0.5em',
   },
   mainContainer: {
-    paddingLeft: '1em !important',
-    paddingRight: '1em !important',
+    paddingLeft: '5em !important',
+    paddingRight: '5em !important',
     paddingTop: '2em !important',
     paddingBottom: '10em  !important',
   },
@@ -39,22 +38,24 @@ const Website = (props) => {
   const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
   const matchesXS = useMediaQuery(theme.breakpoints.down('xs'));
   return (
-    <Grid container direction='column' className={classes.mainContainer}>
-      <Grid item container direction='row'>
-        <Grid
-          item
-          className={classes.arrowContainer}
-          style={{ marginRight: '1em', marginLeft: '-3.5em' }}
-        >
-          <IconButton
-            style={{ backgroundColor: 'transparent' }}
-            component={Link}
-            to='/mobileapps'
-            onClick={() => props.setSelectedIndex(2)}
+    <Grid container direction='column'>
+      <Grid item container direction='row' className={classes.mainContainer}>
+        <Hidden mdDown>
+          <Grid
+            item
+            className={classes.arrowContainer}
+            style={{ marginRight: '1em', marginLeft: '-3.5em' }}
           >
-            <img src={backArrow} alt='IOS?Android page' />
-          </IconButton>
-        </Grid>
+            <IconButton
+              style={{ backgroundColor: 'transparent' }}
+              component={Link}
+              to='/mobileapps'
+              onClick={() => props.setSelectedIndex(2)}
+            >
+              <img src={backArrow} alt='IOS?Android page' />
+            </IconButton>
+          </Grid>
+        </Hidden>
         <Grid item container direction='column' className={classes.heading}>
           <Grid item>
             <Typography variant='h2'>Website development</Typography>
@@ -86,23 +87,25 @@ const Website = (props) => {
             </Typography>
           </Grid>
         </Grid>
-        <Grid item className={classes.arrowContainer}>
-          <IconButton
-            style={{ backgroundColor: 'transparent' }}
-            component={Link}
-            to='/services'
-            onClick={() => props.setSelectedIndex(0)}
-          >
-            <img src={forwardArrow} alt='services page' />
-          </IconButton>
-        </Grid>
+        <Hidden mdDown>
+          <Grid item className={classes.arrowContainer}>
+            <IconButton
+              style={{ backgroundColor: 'transparent' }}
+              component={Link}
+              to='/services'
+              onClick={() => props.setSelectedIndex(0)}
+            >
+              <img src={forwardArrow} alt='services page' />
+            </IconButton>
+          </Grid>
+        </Hidden>
       </Grid>
       <Grid
         item
         container
         direction={matchesSM ? 'column ' : 'row'}
         alignItems='center'
-        className={classes.rowContainer}
+        className={classes.mainContainer}
         style={{ marginTop: '15em' }}
       >
         <Grid item>
@@ -131,7 +134,7 @@ const Website = (props) => {
         direction={matchesSM ? 'column ' : 'row'}
         alignItems='center'
         justifyContent='flex-end'
-        className={classes.rowContainer}
+        className={classes.mainContainer}
         style={{ marginBottom: '15em', marginTop: '15em' }}
       >
         <Grid item>
@@ -155,7 +158,7 @@ const Website = (props) => {
           </Typography>
         </Grid>
       </Grid>
-      <Grid item container direction='row' alignItems='center' className={classes.rowContainer}>
+      <Grid item container direction='row' alignItems='center' className={classes.mainContainer}>
         <Grid item>
           <Grid container direction='column'>
             <Grid item>
@@ -187,7 +190,7 @@ const Website = (props) => {
         direction={matchesSM ? 'column ' : 'row'}
         alignItems='center'
         justifyContent='flex-end'
-        className={classes.rowContainer}
+        className={classes.mainContainer}
         style={{ marginBottom: '15em', marginTop: '15em' }}
       >
         <Grid item>
@@ -215,7 +218,7 @@ const Website = (props) => {
         </Grid>
       </Grid>
       <Grid item>
-        <CallToAction setValue={props.setValue} />
+        <CallToAction />
       </Grid>
     </Grid>
   );

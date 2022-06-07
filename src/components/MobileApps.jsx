@@ -5,7 +5,8 @@ import { makeStyles, useTheme } from '@mui/styles';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Hidden from '@mui/material/Hidden';
+import { Hidden } from '@mui/material';
+
 import IconButton from '@mui/material/IconButton';
 import backArrow from '../assets/images/backArrow.svg';
 import forwardArrow from '../assets/images/forwardArrow.svg';
@@ -22,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '0.5em',
   },
   mainContainer: {
-    paddingLeft: '1em !important',
-    paddingRight: '1em !important',
+    paddingLeft: '5em !important',
+    paddingRight: '5em !important',
     paddingTop: '2em !important',
     paddingBottom: '10em  !important',
   },
@@ -47,22 +48,24 @@ const MobileApps = (props) => {
     },
   };
   return (
-    <Grid container direction='column' className={classes.mainContainer}>
-      <Grid item container direction='row'>
-        <Grid
-          item
-          className={classes.arrowContainer}
-          style={{ marginRight: '1em', marginLeft: '-3.5em' }}
-        >
-          <IconButton
-            style={{ backgroundColor: 'transparent' }}
-            component={Link}
-            to='/customsoftware'
-            onClick={() => props.setSelectedIndex(1)}
+    <Grid container direction='column'>
+      <Grid item container direction='row' className={classes.mainContainer}>
+        <Hidden mdDown>
+          <Grid
+            item
+            className={classes.arrowContainer}
+            style={{ marginRight: '1em', marginLeft: '-3.5em' }}
           >
-            <img src={backArrow} alt='Back to customsoftware page' />
-          </IconButton>
-        </Grid>
+            <IconButton
+              style={{ backgroundColor: 'transparent' }}
+              component={Link}
+              to='/customsoftware'
+              onClick={() => props.setSelectedIndex(1)}
+            >
+              <img src={backArrow} alt='Back to customsoftware page' />
+            </IconButton>
+          </Grid>
+        </Hidden>
         <Grid item container direction='column' className={classes.heading} justifyContent='center'>
           <Grid item>
             <Typography variant='h2'>IOS/Android APP development</Typography>
@@ -94,22 +97,24 @@ const MobileApps = (props) => {
             </Typography>
           </Grid>
         </Grid>
-        <Grid item className={classes.arrowContainer}>
-          <IconButton
-            style={{ backgroundColor: 'transparent' }}
-            component={Link}
-            to='/websites'
-            onClick={() => props.setSelectedIndex(3)}
-          >
-            <img src={forwardArrow} alt='forward to website development page' />
-          </IconButton>
-        </Grid>
+        <Hidden mdDown>
+          <Grid item className={classes.arrowContainer}>
+            <IconButton
+              style={{ backgroundColor: 'transparent' }}
+              component={Link}
+              to='/websites'
+              onClick={() => props.setSelectedIndex(3)}
+            >
+              <img src={forwardArrow} alt='forward to website development page' />
+            </IconButton>
+          </Grid>
+        </Hidden>
       </Grid>
       <Grid
         item
         container
         direction={matchesSM ? 'column' : 'row'}
-        className={classes.rowContainer}
+        className={classes.mainContainer}
         style={{ marginTop: '15em', marginBottom: '15em' }}
       >
         <Grid item container direction='column' md textAlign='center'>
@@ -158,7 +163,7 @@ const MobileApps = (props) => {
         item
         container
         direction={matchesMD ? 'column' : 'row'}
-        className={classes.rowContainer}
+        className={classes.mainContainer}
       >
         <Grid item container direction='column' md alignItems='center'>
           <Grid item>
